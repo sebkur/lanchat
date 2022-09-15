@@ -1,5 +1,32 @@
+buildscript {
+    repositories {
+        maven { url 'https://mvn.topobyte.de' }
+    }
+    dependencies {
+        classpath 'de.topobyte:gradle-launch-and-install-plugin:0.0.5'
+    }
+}
+
+apply plugin: 'application'
+apply plugin: 'de.topobyte.launch-and-install-gradle-plugin'
+
+startScripts.enabled = false
+
+launchAndInstall {
+    installationPath = 'mobanisto/lanchat'
+    makeselfLabel = 'LanChat'
+    createScript(project, 'de.mobanisto.lanchat.Receive', 'lanchat-receive')
+    createScript(project, 'de.mobanisto.lanchat.Send', 'lanchat-send')
+}
+
 dependencies {
     implementation project(':lanchat-core')
+}
+
+distributions {
+    main {
+        distributionBaseName = 'lanchat'
+    }
 }
 
 task copyJars(type: Copy) {
@@ -14,12 +41,4 @@ task copyDeps(type: Copy) {
 
 task createRuntime(dependsOn: [copyJars, copyDeps]) {
     description 'Setup the execution environment for the main scripts'
-}
-
-publishing {
-    publications {
-        maven(MavenPublication) {
-            from components.java
-        }
-    }
 }
