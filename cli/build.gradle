@@ -17,6 +17,8 @@ launchAndInstall {
     makeselfLabel = 'LanChat'
     createScript(project, 'de.mobanisto.lanchat.Receive', 'lanchat-receive')
     createScript(project, 'de.mobanisto.lanchat.Send', 'lanchat-send')
+    createScript(project, 'de.mobanisto.lanchat.ReceiveFile', 'lanchat-receive-file')
+    createScript(project, 'de.mobanisto.lanchat.SendFile', 'lanchat-send-file')
 }
 
 dependencies {
