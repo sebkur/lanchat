@@ -20,7 +20,7 @@ public class ReceiveFile
 	public static void main(String[] args) throws IOException
 	{
 		if (args.length != 1) {
-			System.out.print("usage: receive-file <file>");
+			System.out.println("usage: receive-file <file>");
 			System.exit(1);
 		}
 

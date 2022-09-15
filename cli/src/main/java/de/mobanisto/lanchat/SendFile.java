@@ -17,7 +17,7 @@ public class SendFile
 			throws UnknownHostException, IOException
 	{
 		if (args.length != 2) {
-			System.out.print("usage: send-file <ip> <file>");
+			System.out.println("usage: send-file <ip> <file>");
 			System.exit(1);
 		}
 
