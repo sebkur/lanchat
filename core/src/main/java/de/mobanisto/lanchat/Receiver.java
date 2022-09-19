@@ -20,7 +20,7 @@ public class Receiver
 	public void run()
 	{
 		try (DatagramSocket serverSocket = new DatagramSocket(port)) {
-			byte[] receiveData = new byte[8];
+			byte[] receiveData = new byte[65507];
 
 			System.out.println(String.format("Listening on %s:%d",
 					InetAddress.getLocalHost().getHostAddress(), port));
