@@ -1,3 +1,4 @@
-include 'core', 'cli'
+include 'core', 'cli', 'compose'
 project(':core').name = 'lanchat-core'
 project(':cli').name = 'lanchat-cli'
+project(':compose').name = 'lanchat-compose'

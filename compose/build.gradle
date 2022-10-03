@@ -1,0 +1,36 @@
+import org.jetbrains.compose.desktop.application.dsl.TargetFormat
+
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.6.10'
+    id 'org.jetbrains.compose' version '1.1.1'
+}
+
+repositories {
+    jetbrainsCompose()
+}
+
+dependencies {
+    implementation project(':lanchat-core')
+    implementation compose.desktop.currentOs
+    implementation compose.materialIconsExtended
+}
+
+compose.desktop {
+    application {
+        mainClass = "de.mobanisto.lanchat.ComposeUIKt"
+        nativeDistributions {
+            targetFormats = [TargetFormat.Deb]
+            packageName = "Lanchat"
+            description = "Lanchat - Insecure Network Chat"
+            vendor = "Mobanisto"
+            copyright = "2022 Mobanisto"
+            licenseFile.set(project.file("LICENSE.txt"))
+            linux {
+                packageName = "lanchat"
+                debPackageVersion = "0.0.1"
+                appCategory = "comm"
+                menuGroup = "Network;Chat;InstantMessaging;"
+            }
+        }
+    }
+}
