@@ -38,8 +38,6 @@ fun main() {
     ComposeUI().run()
 }
 
-// TODO: use core to send broadcast messages
-
 class ComposeUI {
 
     fun run() {
@@ -102,7 +100,11 @@ class ComposeUI {
     private fun sendMessage(messages: MutableList<Message>, message: String) {
         if (message.isBlank()) return
         println("sending: $message")
-        messages.add(Message("localhost", message))
+        val sender = Sender(5000)
+        val addresses = sender.listAllBroadcastAddresses()
+        for (address in addresses) {
+            sender.broadcast(message, address)
+        }
     }
 
 }
