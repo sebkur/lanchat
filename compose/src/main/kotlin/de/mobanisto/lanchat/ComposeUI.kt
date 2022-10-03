@@ -39,13 +39,18 @@ fun main() {
 }
 
 // TODO: use core to send broadcast messages
-// TODO: use core to receive messages
 
 class ComposeUI {
 
     fun run() {
         singleWindowApplication(title = "Lanchat") {
             val messages = remember { mutableStateListOf<Message>() }
+            Thread {
+                val receiver = Receiver(5000) { source, message ->
+                    messages.add(Message(source.toString(), message))
+                }
+                receiver.run()
+            }.start()
             Scaffold(bottomBar = { MessageInput(messages) }) { padding ->
                 Messages(padding, messages)
             }

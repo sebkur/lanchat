@@ -1,5 +1,7 @@
 package de.mobanisto.lanchat;
 
+import jdk.vm.ci.code.site.Call;
+
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 import java.io.IOException;
@@ -10,11 +12,17 @@ import java.net.InetAddress;
 public class Receiver
 {
 
-	private int port;
+	public interface Callback {
+		public void received(InetAddress source, String message);
+	}
 
-	public Receiver(int port)
+	private int port;
+	private Callback callback;
+
+	public Receiver(int port, Callback callback)
 	{
 		this.port = port;
+		this.callback = callback;
 	}
 
 	public void run()
@@ -32,8 +40,7 @@ public class Receiver
 				String message = new String(receivePacket.getData(), 0,
 						receivePacket.getLength(), UTF_8);
 				InetAddress source = receivePacket.getAddress();
-				System.out.println(
-						String.format("received from %s: %s", source, message));
+				callback.received(source, message);
 			}
 		} catch (IOException e) {
 			System.out.println(e);
