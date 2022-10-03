@@ -83,7 +83,12 @@ class ComposeUI {
             Divider()
             Text("Enter some text and press 'send' to broadcast message on the LAN:")
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                TextField(value, setValue, placeholder = { Text("Type a message") })
+                TextField(
+                    value,
+                    setValue,
+                    placeholder = { Text("Type a message") },
+                    modifier = Modifier.weight(1f, true)
+                )
                 Button({ sendMessage(messages, value) }) {
                     Icon(
                         imageVector = Icons.Filled.Send,
