@@ -17,7 +17,7 @@ execute this:
 
 ## Command line tools
 
-There are also a few command line utilities that can be used to pariticpate
+There are also a few command line utilities that can be used to participate
 in message and file exchange. To build those tools type this:
 
     ./gradlew installDist
