@@ -13,6 +13,8 @@ execute this:
 
     ./gradlew lanchat-compose:run
 
+![](screenshot.png)
+
 ## Command line tools
 
 There are also a few command line utilities that can be used to pariticpate
