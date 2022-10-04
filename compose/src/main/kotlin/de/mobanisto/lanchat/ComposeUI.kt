@@ -49,6 +49,13 @@ class ComposeUI {
                 }
                 receiver.run()
             }.start()
+            messages.add(Message("/192.168.0.2", "Could you send us the link again?"))
+            messages.add(Message("/192.168.0.3", "Sure"))
+            messages.add(Message("/192.168.0.3", "https://github.com/sebkur/lanchat"))
+            messages.add(Message("/192.168.0.4", "Thanks!"))
+//            for (i in 1..100) {
+//                messages.add(Message("localhost", "message $i"))
+//            }
             Scaffold(bottomBar = { MessageInput(messages) }) { padding ->
                 Messages(padding, messages)
             }
