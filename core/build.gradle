@@ -1,9 +1,27 @@
-if (project.hasProperty("topobyte")) {
-    apply from: 'file:///' + System.getProperty("user.home") \
-        + '/.gradle/topobyte.gradle'
+plugins {
+    id 'java'
+    id 'eclipse'
+    id 'maven-publish'
 }
 
+if (project.hasProperty("topobyte")) {
+    apply from: 'file:///' + System.getProperty("user.home") \
+         + '/.gradle/topobyte.gradle'
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
 dependencies {
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = "sources"
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives sourcesJar
 }
 
 publishing {

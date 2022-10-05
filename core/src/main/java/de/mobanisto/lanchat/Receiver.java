@@ -1,18 +1,17 @@
 package de.mobanisto.lanchat;
 
-import jdk.vm.ci.code.site.Call;
-
-import static java.nio.charset.StandardCharsets.UTF_8;
-
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 public class Receiver
 {
 
-	public interface Callback {
+	public interface Callback
+	{
 		public void received(InetAddress source, String message);
 	}
 

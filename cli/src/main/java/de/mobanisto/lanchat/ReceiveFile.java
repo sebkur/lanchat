@@ -1,9 +1,5 @@
 package de.mobanisto.lanchat;
 
-import static java.nio.file.StandardOpenOption.CREATE;
-import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING;
-import static java.nio.file.StandardOpenOption.WRITE;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.ServerSocket;
@@ -13,6 +9,10 @@ import java.nio.channels.FileChannel;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import static java.nio.file.StandardOpenOption.CREATE;
+import static java.nio.file.StandardOpenOption.TRUNCATE_EXISTING;
+import static java.nio.file.StandardOpenOption.WRITE;
 
 public class ReceiveFile
 {
@@ -34,8 +34,8 @@ public class ReceiveFile
 			InputStream input = socket.getInputStream();
 			try (FileChannel channel = FileChannel.open(output, CREATE,
 					TRUNCATE_EXISTING, WRITE);
-					ReadableByteChannel inputChannel = Channels
-							.newChannel(input);) {
+				 ReadableByteChannel inputChannel = Channels
+						 .newChannel(input);) {
 				long transferred = channel.transferFrom(inputChannel, 0,
 						Integer.MAX_VALUE);
 				System.out.println(

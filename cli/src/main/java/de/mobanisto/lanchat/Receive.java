@@ -1,7 +1,5 @@
 package de.mobanisto.lanchat;
 
-import java.net.InetAddress;
-
 public class Receive
 {
 

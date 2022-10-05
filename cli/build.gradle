@@ -7,8 +7,16 @@ buildscript {
     }
 }
 
-apply plugin: 'application'
+plugins {
+    id 'application'
+    id 'eclipse'
+    id 'maven-publish'
+}
+
 apply plugin: 'de.topobyte.launch-and-install-gradle-plugin'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 startScripts.enabled = false
 

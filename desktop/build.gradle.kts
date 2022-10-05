@@ -1,25 +1,32 @@
+import org.jetbrains.compose.compose
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
 plugins {
-    id 'org.jetbrains.kotlin.jvm' version '1.6.10'
-    id 'org.jetbrains.compose' version '1.1.1'
+    kotlin("multiplatform")
+    id("org.jetbrains.compose")
 }
 
-repositories {
-    jetbrainsCompose()
-}
-
-dependencies {
-    implementation project(':lanchat-core')
-    implementation compose.desktop.currentOs
-    implementation compose.materialIconsExtended
+kotlin {
+    jvm {
+        withJava()
+    }
+    sourceSets {
+        named("jvmMain") {
+            dependencies {
+                implementation(compose.desktop.currentOs)
+                implementation(project(":lanchat-core"))
+                implementation(project(":lanchat-compose"))
+            }
+        }
+    }
 }
 
 compose.desktop {
     application {
-        mainClass = "de.mobanisto.lanchat.ComposeUIKt"
+        mainClass = "de.mobanisto.lanchat.LanChatKt"
+
         nativeDistributions {
-            targetFormats = [TargetFormat.Deb]
+            targetFormats(TargetFormat.Deb)
             packageName = "Lanchat"
             description = "Lanchat - Insecure Network Chat"
             vendor = "Mobanisto"
@@ -34,3 +41,4 @@ compose.desktop {
         }
     }
 }
+
