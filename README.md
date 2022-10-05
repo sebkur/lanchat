@@ -28,3 +28,13 @@ Afterwards, the following tools are available at `cli/build/install/lanchat/bin`
     lanchat-receive               # receive messages from other clients
     lanchat-send-file <ip> <file> # send file to client at ip
     lanchat-receive-file <file>   # receive file sent by other client
+
+## Android
+
+To build an APK for Android, run this:
+
+    ./gradlew assembleDebug
+
+Afterwards, install it using adb:
+
+    adb install -r android/build/outputs/apk/debug/lanchat-android-debug.apk
