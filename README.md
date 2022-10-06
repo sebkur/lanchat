@@ -38,3 +38,9 @@ To build an APK for Android, run this:
 Afterwards, install it using adb:
 
     adb install -r android/build/outputs/apk/debug/lanchat-android-debug.apk
+
+## Building releases
+
+For Google Play, build an `aab` package using:
+
+    ./gradlew bundleRelease
