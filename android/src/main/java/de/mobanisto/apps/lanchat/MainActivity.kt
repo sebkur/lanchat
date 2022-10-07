@@ -1,4 +1,4 @@
-package de.mobanisto.lanchat
+package de.mobanisto.apps.lanchat
 
 import android.content.Context
 import android.net.wifi.WifiManager
@@ -13,11 +13,13 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import de.mobanisto.lanchat.ComposeUI
+import de.mobanisto.lanchat.Message
+import de.mobanisto.lanchat.Receiver
 import java.net.DatagramPacket
 import java.net.DatagramSocket
 import java.net.InetAddress
 import kotlin.concurrent.thread
-
 
 class MainActivity : AppCompatActivity() {
 
