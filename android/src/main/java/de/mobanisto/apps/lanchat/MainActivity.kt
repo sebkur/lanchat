@@ -2,9 +2,11 @@ package de.mobanisto.apps.lanchat
 
 import android.content.Context
 import android.net.wifi.WifiManager
+import android.net.wifi.WifiManager.MulticastLock
 import android.os.Bundle
 import android.os.StrictMode
 import android.os.StrictMode.ThreadPolicy
+import android.util.Log
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,16 +21,25 @@ import de.mobanisto.lanchat.Receiver
 import java.net.DatagramPacket
 import java.net.DatagramSocket
 import java.net.InetAddress
+import java.util.Objects.requireNonNull
 import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var lock: MulticastLock
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.i("activity", "onCreate()")
 
         setContent {
             val messages = remember { mutableStateListOf<Message>() }
             thread {
+                val wifiManager = requireNonNull(applicationContext.getSystemService(WIFI_SERVICE) as WifiManager)
+                lock = requireNonNull(wifiManager).createMulticastLock("multicastLock")
+                lock.setReferenceCounted(false)
+                lock.acquire()
+
                 val receiver = Receiver(5000) { source, message ->
                     messages.add(Message(source.toString(), message))
                 }
@@ -40,6 +51,12 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.i("activity", "onDestroy()")
+        lock.release()
     }
 
     private fun sendMessage(message: String) {
