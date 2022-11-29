@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Lanchat
+Comment=Lanchat - an insecure (W)LAN messenger
+Exec=/opt/lanchat/bin/Lanchat
+Icon=/opt/lanchat/lib/Lanchat.png
+Terminal=false
+Type=Application
+Categories=System;Utility
+MimeType=

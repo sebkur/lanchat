@@ -53,13 +53,19 @@ pinpit.desktop {
             description = "Lanchat - Insecure Network Chat"
             vendor = "Mobanisto"
             copyright = "2022 Mobanisto"
-            licenseFile.set(project.file("LICENSE.txt"))
+            licenseFile.set(project.file("src/main/packaging/LICENSE.txt"))
             linux {
                 packageName = "lanchat"
                 debMaintainer = "sebastian@mobanisto.de"
                 debPackageVersion = versionCode
                 appCategory = "comm"
                 menuGroup = "Network;Chat;InstantMessaging"
+                iconFile.set(project.file("src/main/packaging/deb/lanchat.png"))
+                debPreInst.set(project.file("src/main/packaging/deb/preinst"))
+                debPostInst.set(project.file("src/main/packaging/deb/postinst"))
+                debPreRm.set(project.file("src/main/packaging/deb/prerm"))
+                debCopyright.set(project.file("src/main/packaging/deb/copyright"))
+                debLauncher.set(project.file("src/main/packaging/deb/launcher.desktop"))
                 deb("UbuntuFocalX64") {
                     qualifier = "ubuntu-20.04"
                     arch = "x64"
