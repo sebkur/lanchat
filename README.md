@@ -15,6 +15,16 @@ execute this:
 
 ![](screenshot.png)
 
+It's possible to build packages for Windows and Ubuntu Focal (and compatible):
+
+Build an MSI file:
+
+    ./gradlew pinpitMsiX64
+
+Build a Debian package:
+
+    ./gradlew pinpitDebUbuntuFocalX64
+
 ## Command line tools
 
 There are also a few command line utilities that can be used to participate
