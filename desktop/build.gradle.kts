@@ -39,6 +39,8 @@ dependencies {
     linuxX64(compose.desktop.linux_x64)
 }
 
+val versionCode by extra("1.0.0")
+
 pinpit.desktop {
     application {
         mainClass = "de.mobanisto.lanchat.LanChatKt"
@@ -55,7 +57,7 @@ pinpit.desktop {
             linux {
                 packageName = "lanchat"
                 debMaintainer = "sebastian@mobanisto.de"
-                debPackageVersion = "0.0.1"
+                debPackageVersion = versionCode
                 appCategory = "comm"
                 menuGroup = "Network;Chat;InstantMessaging"
                 deb("UbuntuFocalX64") {
@@ -65,6 +67,21 @@ pinpit.desktop {
                         "libc6", "libexpat1", "libgcc-s1", "libpcre3", "libuuid1", "xdg-utils",
                         "zlib1g", "libnotify4"
                     )
+                }
+            }
+            windows {
+                dirChooser = true
+                perUserInstall = true
+                shortcut = true
+                menu = true
+                menuGroup = "pinpit"
+                upgradeUuid = "CB418F88-237B-45A0-93DD-6D158443A020"
+                packageVersion = versionCode
+                iconFile.set(project.file("src/main/packaging/windows/lanchat.ico"))
+                msi {
+                    arch = "x64"
+                    bitmapBanner.set(project.file("src/main/packaging/windows/banner.bmp"))
+                    bitmapDialog.set(project.file("src/main/packaging/windows/dialog.bmp"))
                 }
             }
         }
