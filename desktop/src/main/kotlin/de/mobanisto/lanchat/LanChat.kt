@@ -2,19 +2,23 @@ package de.mobanisto.lanchat
 
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.window.singleWindowApplication
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.window.Window
+import androidx.compose.ui.window.application
 import kotlin.concurrent.thread
 
 fun main() {
-    singleWindowApplication(title = "Lanchat") {
-        val messages = remember { mutableStateListOf<Message>() }
-        thread {
-            val receiver = Receiver(5000) { source, message ->
-                messages.add(Message(source.toString(), message))
+    application {
+        Window(onCloseRequest = ::exitApplication, title = "LanChat", icon = painterResource("lanchat.png")) {
+            val messages = remember { mutableStateListOf<Message>() }
+            thread {
+                val receiver = Receiver(5000) { source, message ->
+                    messages.add(Message(source.toString(), message))
+                }
+                receiver.run()
             }
-            receiver.run()
+            ComposeUI(messages = messages, sendMessage = ::sendMessage)
         }
-        ComposeUI(messages = messages, sendMessage = ::sendMessage)
     }
 }
 
