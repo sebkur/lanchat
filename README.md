@@ -11,7 +11,7 @@ There's a UI build with Compose for Desktop. To run it from the command line,
 make sure to have a JDK 17 installed on your machine and on your path and
 execute this:
 
-    ./gradlew lanchat-desktop:run
+    ./gradlew lanchat-desktop:pinpitRun
 
 ![](screenshot.png)
 
