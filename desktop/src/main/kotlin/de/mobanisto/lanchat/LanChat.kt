@@ -5,7 +5,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
+import java.awt.Desktop
+import java.net.URI
 import kotlin.concurrent.thread
+
 
 fun main() {
     application {
@@ -17,7 +20,7 @@ fun main() {
                 }
                 receiver.run()
             }
-            ComposeUI(messages = messages, sendMessage = ::sendMessage)
+            ComposeUI(messages = messages, sendMessage = ::sendMessage, onLinkClicked = ::linkClicked)
         }
     }
 }
@@ -29,6 +32,16 @@ private fun sendMessage(message: String) {
     val addresses = sender.listAllBroadcastAddresses()
     for (address in addresses) {
         sender.broadcast(message, address)
+    }
+}
+
+private fun linkClicked(link: String) {
+    val desktop = Desktop.getDesktop()
+    try {
+        desktop.browse(URI(link))
+    } catch (e: Throwable) {
+        println("Error while opening link '$link'")
+        e.printStackTrace()
     }
 }
 

@@ -12,7 +12,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.Button
 import androidx.compose.material.Divider
 import androidx.compose.material.Icon
@@ -40,14 +39,19 @@ import com.halilibo.richtext.markdown.Markdown
 import com.halilibo.richtext.ui.RichText
 
 @Composable
-fun ComposeUI(modifier: Modifier = Modifier, messages: MutableList<Message>, sendMessage: (String) -> Unit) {
+fun ComposeUI(
+    modifier: Modifier = Modifier,
+    messages: MutableList<Message>,
+    sendMessage: (String) -> Unit,
+    onLinkClicked: ((String) -> Unit)? = null
+) {
     Scaffold(modifier, bottomBar = { MessageInput(sendMessage) }) { padding ->
-        Messages(padding, messages)
+        Messages(padding, messages, onLinkClicked)
     }
 }
 
 @Composable
-private fun Messages(padding: PaddingValues, messages: List<Message>) {
+private fun Messages(padding: PaddingValues, messages: List<Message>, onLinkClicked: ((String) -> Unit)?) {
     val scrollState = rememberLazyListState(
         if (messages.isNotEmpty()) messages.lastIndex
         else 0
@@ -55,11 +59,12 @@ private fun Messages(padding: PaddingValues, messages: List<Message>) {
     Box(modifier = Modifier.fillMaxSize().padding(padding)) {
         LazyColumn(state = scrollState, modifier = Modifier.padding(PaddingValues(8.dp))) {
             items(items = messages) { m ->
-                SelectionContainer {
-                    RichText(modifier = Modifier.padding(vertical = 8.dp).fillMaxWidth()) {
-                        Markdown("${m.source}: ${m.message}")
-                    }
+                // TODO: not having a SelectionContainer is not a great solution either
+                // SelectionContainer {
+                RichText(modifier = Modifier.padding(vertical = 8.dp).fillMaxWidth()) {
+                    Markdown("${m.source}: ${m.message}", onLinkClicked =  onLinkClicked)
                 }
+                //}
             }
         }
         VerticalScrollbar(
