@@ -27,7 +27,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.key.Key
+import androidx.compose.ui.input.key.KeyEventType
+import androidx.compose.ui.input.key.isCtrlPressed
+import androidx.compose.ui.input.key.key
+import androidx.compose.ui.input.key.onPreviewKeyEvent
+import androidx.compose.ui.input.key.type
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -58,6 +65,7 @@ private fun Messages(padding: PaddingValues, messages: List<Message>) {
     }
 }
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 private fun MessageInput(sendMessage: (String) -> Unit) {
     val (value, setValue) = remember { mutableStateOf("") }
@@ -69,7 +77,14 @@ private fun MessageInput(sendMessage: (String) -> Unit) {
                 value,
                 setValue,
                 placeholder = { Text("Type a message") },
-                modifier = Modifier.weight(1f, true)
+                modifier = Modifier.weight(1f, true).onPreviewKeyEvent {
+                    if (it.type == KeyEventType.KeyDown && it.key == Key.Enter && it.isCtrlPressed) {
+                        sendMessage(value)
+                        setValue("")
+                        return@onPreviewKeyEvent true
+                    }
+                    false
+                }
             )
             Button({ sendMessage(value) }) {
                 Icon(
