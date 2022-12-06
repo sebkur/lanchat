@@ -36,6 +36,8 @@ import androidx.compose.ui.input.key.key
 import androidx.compose.ui.input.key.onPreviewKeyEvent
 import androidx.compose.ui.input.key.type
 import androidx.compose.ui.unit.dp
+import com.halilibo.richtext.markdown.Markdown
+import com.halilibo.richtext.ui.RichText
 
 @Composable
 fun ComposeUI(modifier: Modifier = Modifier, messages: MutableList<Message>, sendMessage: (String) -> Unit) {
@@ -54,7 +56,9 @@ private fun Messages(padding: PaddingValues, messages: List<Message>) {
         LazyColumn(state = scrollState, modifier = Modifier.padding(PaddingValues(8.dp))) {
             items(items = messages) { m ->
                 SelectionContainer {
-                    Text("${m.source}: ${m.message}", modifier = Modifier.padding(vertical = 8.dp).fillMaxWidth())
+                    RichText(modifier = Modifier.padding(vertical = 8.dp).fillMaxWidth()) {
+                        Markdown("${m.source}: ${m.message}")
+                    }
                 }
             }
         }
