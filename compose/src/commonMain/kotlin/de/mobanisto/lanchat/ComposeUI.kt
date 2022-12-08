@@ -93,7 +93,7 @@ private fun MessageInput(sendMessage: (String) -> Unit) {
     val (value, setValue) = remember { mutableStateOf("") }
     Column(verticalArrangement = Arrangement.spacedBy(8.dp), modifier = Modifier.padding(16.dp)) {
         Divider()
-        Text("Enter some text and press 'send' to broadcast message on the LAN:")
+        Text("Enter some text and press 'send' or Ctrl+Enter to broadcast message on the LAN:")
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             TextField(
                 value,
