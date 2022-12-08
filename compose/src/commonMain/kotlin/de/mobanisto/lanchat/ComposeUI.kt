@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -15,12 +14,14 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.Button
 import androidx.compose.material.Divider
 import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.LocalContentColor
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ContentCopy
 import androidx.compose.material.icons.filled.Send
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -34,6 +35,9 @@ import androidx.compose.ui.input.key.isCtrlPressed
 import androidx.compose.ui.input.key.key
 import androidx.compose.ui.input.key.onPreviewKeyEvent
 import androidx.compose.ui.input.key.type
+import androidx.compose.ui.platform.ClipboardManager
+import androidx.compose.ui.platform.LocalClipboardManager
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.dp
 import com.halilibo.richtext.markdown.Markdown
 import com.halilibo.richtext.ui.RichText
@@ -56,15 +60,24 @@ private fun Messages(padding: PaddingValues, messages: List<Message>, onLinkClic
         if (messages.isNotEmpty()) messages.lastIndex
         else 0
     )
+    val clipboardManager: ClipboardManager = LocalClipboardManager.current
     Box(modifier = Modifier.fillMaxSize().padding(padding)) {
         LazyColumn(state = scrollState, modifier = Modifier.padding(PaddingValues(8.dp))) {
             items(items = messages) { m ->
-                // TODO: not having a SelectionContainer is not a great solution either
-                // SelectionContainer {
-                RichText(modifier = Modifier.padding(vertical = 8.dp).fillMaxWidth()) {
-                    Markdown("${m.source}: ${m.message}", onLinkClicked =  onLinkClicked)
+                Row {
+                    // Not using SelectionContainer here as this prevents links from bing clickable.
+                    // See https://github.com/JetBrains/compose-jb/issues/1450 for details.
+                    RichText(modifier = Modifier.padding(vertical = 8.dp).weight(1f)) {
+                        Markdown("${m.source}: ${m.message}", onLinkClicked = onLinkClicked)
+                    }
+                    IconButton(onClick = { clipboardManager.setText(AnnotatedString((m.message))) }) {
+                        Icon(
+                            imageVector = Icons.Filled.ContentCopy,
+                            contentDescription = null,
+                            tint = LocalContentColor.current.copy(alpha = LocalContentAlpha.current),
+                        )
+                    }
                 }
-                //}
             }
         }
         VerticalScrollbar(
