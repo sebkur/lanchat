@@ -101,14 +101,13 @@ private fun MessageInput(sendMessage: (String) -> Unit) {
                 placeholder = { Text("Type a message") },
                 modifier = Modifier.weight(1f, true).onPreviewKeyEvent {
                     if (it.type == KeyEventType.KeyDown && it.key == Key.Enter && it.isCtrlPressed) {
-                        sendMessage(value)
-                        setValue("")
+                        sendMessage(value); setValue("")
                         return@onPreviewKeyEvent true
                     }
                     false
                 }
             )
-            Button({ sendMessage(value) }) {
+            Button({ sendMessage(value); setValue("") }) {
                 Icon(
                     imageVector = Icons.Filled.Send,
                     contentDescription = null,
