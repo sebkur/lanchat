@@ -50,6 +50,7 @@ pinpit.desktop {
             jvmVersion = "17.0.5+8"
 
             packageName = "Lanchat"
+            packageVersion = versionCode
             description = "Lanchat - Insecure Network Chat"
             vendor = "Mobanisto"
             copyright = "2022 Mobanisto"
