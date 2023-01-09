@@ -75,6 +75,10 @@ pinpit.desktop {
                         "zlib1g", "libnotify4"
                     )
                 }
+                distributableArchive {
+                    format = "tar.gz"
+                    arch = "x64"
+                }
             }
             windows {
                 dirChooser = true
@@ -87,6 +91,10 @@ pinpit.desktop {
                     arch = "x64"
                     bitmapBanner.set(project.file("src/main/packaging/windows/banner.bmp"))
                     bitmapDialog.set(project.file("src/main/packaging/windows/dialog.bmp"))
+                }
+                distributableArchive {
+                    format = "zip"
+                    arch = "x64"
                 }
             }
         }
