@@ -18,7 +18,9 @@ kotlin {
                 implementation(compose.materialIconsExtended)
                 implementation(compose.ui)
                 implementation(project(":lanchat-core"))
-                implementation("com.halilibo.compose-richtext:richtext-commonmark:0.16.0")
+                implementation("com.halilibo.compose-richtext:richtext-commonmark:0.16.0") {
+                    exclude(group = "org.jetbrains.skiko", module = "skiko-awt-runtime-linux-x64")
+                }
             }
         }
     }
