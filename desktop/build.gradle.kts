@@ -78,10 +78,8 @@ pinpit.desktop {
             }
             windows {
                 dirChooser = true
-                perUserInstall = true
                 shortcut = true
-                menu = true
-                menuGroup = "pinpit"
+                menuGroup = "Mobanisto"
                 upgradeUuid = "CB418F88-237B-45A0-93DD-6D158443A020"
                 packageVersion = versionCode
                 iconFile.set(project.file("src/main/packaging/windows/lanchat.ico"))
