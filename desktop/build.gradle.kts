@@ -87,6 +87,7 @@ pinpit.desktop {
                 upgradeUuid = "CB418F88-237B-45A0-93DD-6D158443A020"
                 packageVersion = versionCode
                 iconFile.set(project.file("src/main/packaging/windows/lanchat.ico"))
+                aumid = "Mobanisto.Lanchat"
                 msi {
                     arch = "x64"
                     bitmapBanner.set(project.file("src/main/packaging/windows/banner.bmp"))
