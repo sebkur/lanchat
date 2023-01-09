@@ -19,11 +19,11 @@ It's possible to build packages for Windows and Ubuntu Focal (and compatible):
 
 Build an MSI file:
 
-    ./gradlew pinpitMsiX64
+    ./gradlew pinpitPackageDefaultMsiX64
 
 Build a Debian package:
 
-    ./gradlew pinpitDebUbuntuFocalX64
+    ./gradlew pinpitPackageDefaultDebUbuntuFocalX64
 
 ## Command line tools
 
