@@ -21,6 +21,16 @@ val linuxX64: Configuration by configurations.creating {
     attributes { attribute(attributeUsage, "java-runtime") }
 }
 
+val macosX64: Configuration by configurations.creating {
+    extendsFrom(configurations.implementation.get())
+    attributes { attribute(attributeUsage, "java-runtime") }
+}
+
+val macosArm64: Configuration by configurations.creating {
+    extendsFrom(configurations.implementation.get())
+    attributes { attribute(attributeUsage, "java-runtime") }
+}
+
 sourceSets {
     main {
         java {
@@ -37,9 +47,11 @@ dependencies {
     currentOs(compose.desktop.currentOs)
     windowsX64(compose.desktop.windows_x64)
     linuxX64(compose.desktop.linux_x64)
+    macosX64(compose.desktop.macos_x64)
+    macosArm64(compose.desktop.macos_arm64)
 }
 
-val versionCode by extra("1.0.0")
+val versionCode by extra("1.1.0")
 
 pinpit.desktop {
     application {
@@ -96,6 +108,19 @@ pinpit.desktop {
                 distributableArchive {
                     format = "zip"
                     arch = "x64"
+                }
+            }
+            macOS {
+                packageName = "Lanchat"
+                bundleID = "de.mobanisto.lanchat"
+                appCategory = "public.app-category.social-networking"
+                distributableArchive {
+                    format = "zip"
+                    arch = "x64"
+                }
+                distributableArchive {
+                    format = "zip"
+                    arch = "arm64"
                 }
             }
         }
