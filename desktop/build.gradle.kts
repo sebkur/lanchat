@@ -65,7 +65,7 @@ pinpit.desktop {
             packageVersion = versionCode
             description = "Lanchat - Insecure Network Chat"
             vendor = "Mobanisto"
-            copyright = "2022 Mobanisto"
+            copyright = "2022-2023 Mobanisto"
             licenseFile.set(project.file("src/main/packaging/LICENSE.txt"))
             linux {
                 packageName = "lanchat"

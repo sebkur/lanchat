@@ -1,7 +1,7 @@
 The MIT License (MIT)
 =====================
 
-Copyright © 2022 Mobanisto UG (haftungsbeschränkt)
+Copyright © 2022-2023 Mobanisto UG (haftungsbeschränkt)
 
 Permission is hereby granted, free of charge, to any person
 obtaining a copy of this software and associated documentation
