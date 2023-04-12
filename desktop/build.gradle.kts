@@ -112,6 +112,7 @@ pinpit.desktop {
             }
             macOS {
                 packageName = "Lanchat"
+                iconFile.set(project.file("../artwork/lanchat.icns"))
                 bundleID = "de.mobanisto.lanchat"
                 appCategory = "public.app-category.social-networking"
                 distributableArchive {
