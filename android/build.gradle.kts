@@ -15,11 +15,12 @@ if (haveKeystoreProperties) {
 }
 
 android {
-    compileSdk = 32
+    compileSdk = 33
+    namespace = "de.mobanisto.apps.lanchat"
 
     defaultConfig {
         minSdk = 21
-        targetSdk = 32
+        targetSdk = 33
         versionCode = 3
         versionName = "0.1.2"
     }

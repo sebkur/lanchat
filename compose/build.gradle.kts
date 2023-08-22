@@ -27,11 +27,11 @@ kotlin {
 }
 
 android {
-    compileSdk = 32
+    compileSdk = 33
+    namespace = "de.mobanisto.lanchat.common"
 
     defaultConfig {
         minSdk = 21
-        targetSdk = 32
     }
 
     compileOptions {
