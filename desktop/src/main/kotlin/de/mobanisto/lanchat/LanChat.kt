@@ -1,30 +1,50 @@
 package de.mobanisto.lanchat
 
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
+import com.github.ajalt.clikt.core.CliktCommand
+import com.github.ajalt.clikt.parameters.options.flag
+import com.github.ajalt.clikt.parameters.options.option
 import java.awt.Desktop
 import java.net.URI
 import kotlin.concurrent.thread
+import kotlin.system.exitProcess
 
+fun main(args: Array<String>) = LanChat().main(args)
 
-fun main() {
-    val version = Version.getVersion()
-    println("LanChat version $version")
-    val greeting = Message("System", "Welcome to LanChat version $version")
-    application {
-        Window(onCloseRequest = ::exitApplication, title = "LanChat", icon = painterResource("lanchat.png")) {
-            val messages = remember { mutableStateListOf(greeting) }
-            thread {
-                val receiver = Receiver(5000) { source, message ->
-                    messages.add(Message(source.toString(), message))
+private class LanChat : CliktCommand(
+    name = "Lanchat",
+    help = "Lanchat - an insecure (W)LAN messenger"
+) {
+
+    private val version by option(
+        "--version",
+        help = "Show version and exit"
+    ).flag(default = false)
+
+    override fun run() {
+        val versionCode = Version.getVersion()
+        println("LanChat version $versionCode")
+
+        if (version) {
+            exitProcess(0)
+        }
+
+        val greeting = Message("System", "Welcome to LanChat version $versionCode")
+        application {
+            Window(onCloseRequest = ::exitApplication, title = "LanChat", icon = painterResource("lanchat.png")) {
+                val messages = remember { mutableStateListOf(greeting) }
+                thread {
+                    val receiver = Receiver(5000) { source, message ->
+                        messages.add(Message(source.toString(), message))
+                    }
+                    receiver.run()
                 }
-                receiver.run()
+                ComposeUI(messages = messages, sendMessage = ::sendMessage, onLinkClicked = ::linkClicked)
             }
-            ComposeUI(messages = messages, sendMessage = ::sendMessage, onLinkClicked = ::linkClicked)
         }
     }
 }
