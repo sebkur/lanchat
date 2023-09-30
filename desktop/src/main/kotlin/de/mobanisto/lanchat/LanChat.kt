@@ -11,6 +11,8 @@ import kotlin.concurrent.thread
 
 
 fun main() {
+    val version = Version.getVersion()
+    println("LanChat version $version")
     application {
         Window(onCloseRequest = ::exitApplication, title = "LanChat", icon = painterResource("lanchat.png")) {
             val messages = remember { mutableStateListOf<Message>() }
