@@ -51,7 +51,7 @@ dependencies {
     macosArm64(compose.desktop.macos_arm64)
 }
 
-val versionCode by extra("1.1.0")
+val versionCode = version as String
 
 pinpit.desktop {
     application {

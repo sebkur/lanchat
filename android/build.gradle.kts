@@ -14,6 +14,9 @@ if (haveKeystoreProperties) {
     keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 }
 
+val rootVersionCode = version as String
+val androidVersionCode = (extra["androidVersionCode"] as String).toInt()
+
 android {
     compileSdk = 33
     namespace = "de.mobanisto.apps.lanchat"
@@ -21,8 +24,8 @@ android {
     defaultConfig {
         minSdk = 21
         targetSdk = 33
-        versionCode = 6
-        versionName = "0.1.3"
+        versionCode = androidVersionCode
+        versionName = rootVersionCode
     }
 
     compileOptions {
