@@ -15,7 +15,8 @@ execute this:
 
 ![](screenshot.png)
 
-It's possible to build packages for Windows and Ubuntu Focal (and compatible):
+It's possible to build packages for Windows, Ubuntu Focal (and compatible)
+and macOS:
 
 Build an MSI file:
 
@@ -24,6 +25,10 @@ Build an MSI file:
 Build a Debian package:
 
     ./gradlew pinpitPackageDefaultDebUbuntuFocalX64
+
+Build macOS packages:
+
+    ./gradlew pinpitPackageDefaultDistributableZipMacosArm64 pinpitPackageDefaultDistributableZipMacosX64
 
 ## Command line tools
 
