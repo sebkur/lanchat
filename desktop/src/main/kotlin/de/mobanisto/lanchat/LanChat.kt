@@ -14,12 +14,10 @@ import kotlin.concurrent.thread
 fun main() {
     val version = Version.getVersion()
     println("LanChat version $version")
+    val greeting = Message("System", "Welcome to LanChat version $version")
     application {
         Window(onCloseRequest = ::exitApplication, title = "LanChat", icon = painterResource("lanchat.png")) {
-            val messages = remember { mutableStateListOf<Message>() }
-            LaunchedEffect(Unit) {
-                messages.add(Message("System", "Welcome to LanChat version $version"))
-            }
+            val messages = remember { mutableStateListOf(greeting) }
             thread {
                 val receiver = Receiver(5000) { source, message ->
                     messages.add(Message(source.toString(), message))
