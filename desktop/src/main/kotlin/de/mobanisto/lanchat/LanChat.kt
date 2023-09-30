@@ -1,5 +1,6 @@
 package de.mobanisto.lanchat
 
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.res.painterResource
@@ -16,6 +17,9 @@ fun main() {
     application {
         Window(onCloseRequest = ::exitApplication, title = "LanChat", icon = painterResource("lanchat.png")) {
             val messages = remember { mutableStateListOf<Message>() }
+            LaunchedEffect(Unit) {
+                messages.add(Message("System", "Welcome to LanChat version $version"))
+            }
             thread {
                 val receiver = Receiver(5000) { source, message ->
                     messages.add(Message(source.toString(), message))
