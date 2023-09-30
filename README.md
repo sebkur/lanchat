@@ -18,6 +18,10 @@ execute this:
 It's possible to build packages for Windows, Ubuntu Focal (and compatible)
 and macOS:
 
+Build packages for all operating systems:
+
+    ./gradlew pinpitPackageDefault
+
 Build an MSI file:
 
     ./gradlew pinpitPackageDefaultMsiX64
