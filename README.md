@@ -54,3 +54,8 @@ Afterwards, install it using adb:
 For Google Play, build an `aab` package using:
 
     ./gradlew bundleRelease
+
+## Technical details
+
+The default port configured to broadcast messages is 5000.
+The CLI uses port 5001 to send and receives files.
