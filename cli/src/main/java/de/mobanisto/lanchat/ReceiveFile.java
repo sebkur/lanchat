@@ -35,7 +35,7 @@ public class ReceiveFile
 			try (FileChannel channel = FileChannel.open(output, CREATE,
 					TRUNCATE_EXISTING, WRITE);
 				 ReadableByteChannel inputChannel = Channels
-						 .newChannel(input);) {
+						 .newChannel(input)) {
 				long transferred = channel.transferFrom(inputChannel, 0,
 						Integer.MAX_VALUE);
 				System.out.println(
