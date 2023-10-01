@@ -67,6 +67,7 @@ pinpit.desktop {
         nativeDistributions {
             jvmVendor = "adoptium"
             jvmVersion = "17.0.8.1+1"
+            modules("jdk.management")
 
             packageName = "Lanchat"
             packageVersion = versionCode
