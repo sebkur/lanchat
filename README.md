@@ -11,7 +11,7 @@ There's a UI build with Compose for Desktop. To run it from the command line,
 make sure to have a JDK 17 installed on your machine and on your path and
 execute this:
 
-    ./gradlew lanchat-desktop:pinpitRun
+    ./gradlew pinpitRun
 
 ![](screenshot.png)
 
@@ -37,16 +37,21 @@ Build macOS packages:
 ## Command line tools
 
 There are also a few command line utilities that can be used to participate
-in message and file exchange. To build those tools type this:
+in message and file exchange. To see a list of available subcommands, type:
 
-    ./gradlew installDist
+    ./gradlew pinpitRun --args="--help"
 
-Afterwards, the following tools are available at `cli/build/install/lanchat/bin`:
+Currently there are the following subcommands available:
 
-    lanchat-send <message>        # send message to other clients in the same network
-    lanchat-receive               # receive messages from other clients
-    lanchat-send-file <ip> <file> # send file to client at ip
-    lanchat-receive-file <file>   # receive file sent by other client
+    send <message>        # send message to other clients in the same network
+    receive               # receive messages from other clients
+    send-file <ip> <file> # send file to client at ip
+    receive-file <file>   # receive file sent by other client
+
+Most commands also have additional optional options. To see a help message for
+a subcommand type:
+
+    ./gradlew pinpitRun --args="send --help"
 
 ## Android
 

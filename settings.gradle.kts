@@ -26,9 +26,8 @@ pluginManagement {
     }
 }
 
-include("core", "cli", "compose", "desktop", "android")
+include("core", "compose", "desktop", "android")
 project(":core").name = "lanchat-core"
-project(":cli").name = "lanchat-cli"
 project(":compose").name = "lanchat-compose"
 project(":desktop").name = "lanchat-desktop"
 project(":android").name = "lanchat-android"
