@@ -6,6 +6,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import com.github.ajalt.clikt.core.CliktCommand
+import com.github.ajalt.clikt.core.subcommands
 import com.github.ajalt.clikt.parameters.options.flag
 import com.github.ajalt.clikt.parameters.options.option
 import java.awt.Desktop
@@ -13,11 +14,17 @@ import java.net.URI
 import kotlin.concurrent.thread
 import kotlin.system.exitProcess
 
-fun main(args: Array<String>) = LanChat().main(args)
+fun main(args: Array<String>) = LanChat().subcommands(
+    SendMessage(),
+    ReceiveMessages(),
+    SendFile(),
+    ReceiveFile(),
+).main(args)
 
 private class LanChat : CliktCommand(
     name = "Lanchat",
-    help = "Lanchat - an insecure (W)LAN messenger"
+    help = "Lanchat - an insecure (W)LAN messenger",
+    invokeWithoutSubcommand = true
 ) {
 
     private val version by option(
@@ -29,13 +36,22 @@ private class LanChat : CliktCommand(
         val versionCode = Version.getVersion()
         println("LanChat version $versionCode")
 
+        val subcommand = currentContext.invokedSubcommand
+        if (subcommand != null) {
+            return
+        }
+
         if (version) {
             exitProcess(0)
         }
 
         val greeting = Message("System", "Welcome to LanChat version $versionCode")
         application {
-            Window(onCloseRequest = ::exitApplication, title = "LanChat", icon = painterResource("lanchat.png")) {
+            Window(
+                onCloseRequest = ::exitApplication,
+                title = "LanChat",
+                icon = painterResource("lanchat.png")
+            ) {
                 val messages = remember { mutableStateListOf(greeting) }
                 thread {
                     val receiver = Receiver(5000) { source, message ->
@@ -43,7 +59,11 @@ private class LanChat : CliktCommand(
                     }
                     receiver.run()
                 }
-                ComposeUI(messages = messages, sendMessage = ::sendMessage, onLinkClicked = ::linkClicked)
+                ComposeUI(
+                    messages = messages,
+                    sendMessage = ::sendMessage,
+                    onLinkClicked = ::linkClicked
+                )
             }
         }
     }
