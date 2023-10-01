@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.compose")
     id("de.mobanisto.pinpit")
     id("de.topobyte.version-access-gradle-plugin")
+    id("org.jlleitschuh.gradle.ktlint")
 }
 
 generateVersionAccessSource {
@@ -133,4 +134,3 @@ pinpit.desktop {
         }
     }
 }
-

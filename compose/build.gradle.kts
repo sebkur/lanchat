@@ -4,6 +4,7 @@ plugins {
     id("com.android.library")
     kotlin("multiplatform")
     id("org.jetbrains.compose")
+    id("org.jlleitschuh.gradle.ktlint")
 }
 
 kotlin {
@@ -46,4 +47,3 @@ android {
         }
     }
 }
-

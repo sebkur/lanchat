@@ -8,6 +8,7 @@ plugins {
     id("com.android.library") apply false
     id("org.jetbrains.compose") apply false
     id("de.topobyte.version-access-gradle-plugin") apply false
+    id("org.jlleitschuh.gradle.ktlint") apply false
 }
 
 tasks.wrapper {

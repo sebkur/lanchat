@@ -68,4 +68,3 @@ private fun linkClicked(link: String) {
         e.printStackTrace()
     }
 }
-

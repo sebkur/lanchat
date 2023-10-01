@@ -12,6 +12,7 @@ pluginManagement {
         val composeVersion = extra["compose.version"] as String
         val pinpitVersion = extra["pinpit.version"] as String
         val versionAccessPlugin = extra["version.access.version"] as String
+        val ktlintVersion = extra["ktlint.version"] as String
 
         kotlin("jvm").version(kotlinVersion)
         kotlin("multiplatform").version(kotlinVersion)
@@ -21,6 +22,7 @@ pluginManagement {
         id("org.jetbrains.compose").version(composeVersion)
         id("de.mobanisto.pinpit").version(pinpitVersion)
         id("de.topobyte.version-access-gradle-plugin").version(versionAccessPlugin)
+        id("org.jlleitschuh.gradle.ktlint").version(ktlintVersion)
     }
 }
 
