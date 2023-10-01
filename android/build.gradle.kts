@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.io.FileInputStream
 import java.util.*
 
@@ -16,6 +17,15 @@ if (haveKeystoreProperties) {
 
 val rootVersionCode = version as String
 val androidVersionCode = (extra["androidVersionCode"] as String).toInt()
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+tasks.withType<KotlinCompile> {
+    kotlinOptions.jvmTarget = "11"
+}
 
 android {
     compileSdk = 33
