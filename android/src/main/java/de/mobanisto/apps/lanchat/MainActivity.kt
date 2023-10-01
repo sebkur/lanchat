@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import de.mobanisto.lanchat.ComposeUI
 import de.mobanisto.lanchat.Message
 import de.mobanisto.lanchat.Receiver
+import de.mobanisto.lanchat.Version
 import java.net.DatagramPacket
 import java.net.DatagramSocket
 import java.net.InetAddress
@@ -32,8 +33,11 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         Log.i("activity", "onCreate()")
 
+        val versionCode = Version.getVersion()
+        val greeting = Message("System", "Welcome to LanChat version $versionCode")
+
         setContent {
-            val messages = remember { mutableStateListOf<Message>() }
+            val messages = remember { mutableStateListOf(greeting) }
             thread {
                 val wifiManager = requireNonNull(applicationContext.getSystemService(WIFI_SERVICE) as WifiManager)
                 lock = requireNonNull(wifiManager).createMulticastLock("multicastLock")

@@ -4,12 +4,7 @@ plugins {
     kotlin("jvm")
     id("org.jetbrains.compose")
     id("de.mobanisto.pinpit")
-    id("de.topobyte.version-access-gradle-plugin")
     id("org.jlleitschuh.gradle.ktlint")
-}
-
-generateVersionAccessSource {
-    packageName = "de.mobanisto.lanchat"
 }
 
 val attributeUsage = Attribute.of("org.gradle.usage", String::class.java)

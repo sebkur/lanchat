@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'eclipse'
     id 'maven-publish'
+    id 'de.topobyte.version-access-gradle-plugin'
 }
 
 if (project.hasProperty("topobyte")) {
@@ -11,6 +12,10 @@ if (project.hasProperty("topobyte")) {
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
+
+generateVersionAccessSource {
+    packageName = "de.mobanisto.lanchat"
+}
 
 dependencies {
 }
