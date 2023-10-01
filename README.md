@@ -69,6 +69,10 @@ For Google Play, build an `aab` package using:
 
     ./gradlew bundleRelease
 
+To build a release `apk` instead:
+
+    ./gradlew assembleRelease
+
 ## Technical details
 
 The default port configured to broadcast messages is 5000.
