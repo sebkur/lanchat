@@ -19,7 +19,10 @@ kotlin {
                 implementation(compose.materialIconsExtended)
                 implementation(compose.ui)
                 implementation(project(":lanchat-core"))
-                implementation("com.halilibo.compose-richtext:richtext-commonmark:0.16.0") {
+                implementation("com.halilibo.compose-richtext:richtext-ui-material:0.20.0")
+                implementation("com.halilibo.compose-richtext:richtext-commonmark:0.20.0") {
+                    // we use the richtext-ui-material variant to exclude the richtext-ui variant
+                    exclude(group = "com.halilibo.compose-richtext", module = "richtext-ui")
                     exclude(group = "org.jetbrains.skiko", module = "skiko-awt-runtime-linux-x64")
                 }
             }
@@ -28,7 +31,7 @@ kotlin {
 }
 
 android {
-    compileSdk = 33
+    compileSdk = 35
     namespace = "de.mobanisto.lanchat.common"
 
     defaultConfig {

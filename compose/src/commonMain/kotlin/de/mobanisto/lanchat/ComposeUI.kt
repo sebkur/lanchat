@@ -5,9 +5,12 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -40,7 +43,7 @@ import androidx.compose.ui.platform.LocalClipboardManager
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.unit.dp
 import com.halilibo.richtext.markdown.Markdown
-import com.halilibo.richtext.ui.RichText
+import com.halilibo.richtext.ui.material.RichText
 
 @Composable
 fun ComposeUI(
@@ -49,17 +52,24 @@ fun ComposeUI(
     sendMessage: (String) -> Unit,
     onLinkClicked: ((String) -> Unit)? = null
 ) {
-    Scaffold(modifier, bottomBar = { MessageInput(sendMessage) }) { padding ->
+    Scaffold(
+        modifier.windowInsetsPadding(WindowInsets.safeDrawing),
+        bottomBar = { MessageInput(sendMessage) }) { padding ->
         Messages(padding, messages, onLinkClicked)
     }
 }
 
 @Composable
-private fun Messages(padding: PaddingValues, messages: List<Message>, onLinkClicked: ((String) -> Unit)?) {
+private fun Messages(
+    padding: PaddingValues,
+    messages: List<Message>,
+    onLinkClicked: ((String) -> Unit)?
+) {
     val scrollState = rememberLazyListState(
         if (messages.isNotEmpty()) messages.lastIndex
         else 0
     )
+
     val clipboardManager: ClipboardManager = LocalClipboardManager.current
     Box(modifier = Modifier.fillMaxSize().padding(padding)) {
         LazyColumn(state = scrollState, modifier = Modifier.padding(PaddingValues(8.dp))) {

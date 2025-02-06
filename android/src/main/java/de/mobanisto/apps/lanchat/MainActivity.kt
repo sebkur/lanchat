@@ -8,10 +8,14 @@ import android.os.StrictMode
 import android.os.StrictMode.ThreadPolicy
 import android.util.Log
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
+import androidx.compose.material.darkColors
+import androidx.compose.material.lightColors
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -30,11 +34,15 @@ class MainActivity : AppCompatActivity() {
     private lateinit var lock: MulticastLock
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         Log.i("activity", "onCreate()")
 
         val versionCode = Version.getVersion()
         val greeting = Message("System", "Welcome to LanChat version $versionCode")
+
+        val lightColors = lightColors()
+        val darkColors = darkColors()
 
         setContent {
             val messages = remember { mutableStateListOf(greeting) }
@@ -49,8 +57,9 @@ class MainActivity : AppCompatActivity() {
                 }
                 receiver.run()
             }
-            MaterialTheme {
-                Surface(color = MaterialTheme.colors.background) {
+            val colors = if (isSystemInDarkTheme()) darkColors else lightColors
+            MaterialTheme(colors = colors) {
+                Surface {
                     ComposeUI(modifier = Modifier.fillMaxSize(), messages = messages, sendMessage = ::sendMessage)
                 }
             }

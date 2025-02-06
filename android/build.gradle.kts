@@ -28,12 +28,12 @@ tasks.withType<KotlinCompile> {
 }
 
 android {
-    compileSdk = 33
+    compileSdk = 35
     namespace = "de.mobanisto.apps.lanchat"
 
     defaultConfig {
         minSdk = 21
-        targetSdk = 33
+        targetSdk = 35
         versionCode = androidVersionCode
         versionName = rootVersionCode
     }
@@ -74,7 +74,7 @@ dependencies {
     implementation(project(":lanchat-core"))
     implementation(project(":lanchat-compose"))
     implementation(compose.material)
-    implementation("androidx.appcompat:appcompat:1.3.0")
-    implementation("androidx.activity:activity-compose:1.3.0")
+    implementation("androidx.appcompat:appcompat:1.7.0")
+    implementation("androidx.activity:activity-compose:1.10.0")
 }
 

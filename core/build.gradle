@@ -10,23 +10,17 @@ if (project.hasProperty("topobyte")) {
          + '/.gradle/topobyte.gradle'
 }
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+java {
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+    withSourcesJar()
+}
 
 generateVersionAccessSource {
     packageName = "de.mobanisto.lanchat"
 }
 
 dependencies {
-}
-
-task sourcesJar(type: Jar, dependsOn: classes) {
-    classifier = "sources"
-    from sourceSets.main.allSource
-}
-
-artifacts {
-    archives sourcesJar
 }
 
 publishing {
