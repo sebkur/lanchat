@@ -62,6 +62,7 @@ dependencies {
     macosX64(compose.desktop.macos_x64)
     macosArm64(compose.desktop.macos_arm64)
     implementation("com.github.ajalt.clikt:clikt:4.2.0")
+    implementation("de.topobyte:shared-preferences:0.1.0")
 }
 
 val versionCode = version as String

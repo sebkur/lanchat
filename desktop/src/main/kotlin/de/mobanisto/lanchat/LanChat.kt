@@ -1,14 +1,19 @@
 package de.mobanisto.lanchat
 
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.Density
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.core.subcommands
 import com.github.ajalt.clikt.parameters.options.flag
 import com.github.ajalt.clikt.parameters.options.option
+import de.mobanisto.lanchat.DensityUtils.DensityDimension
+import de.topobyte.shared.preferences.SharedPreferences
 import java.awt.Desktop
 import java.net.URI
 import kotlin.concurrent.thread
@@ -45,6 +50,9 @@ private class LanChat : CliktCommand(
             exitProcess(0)
         }
 
+        val densityPresent = SharedPreferences.isUIScalePresent()
+        val density = if (!densityPresent) null else SharedPreferences.getUIScale().toFloat()
+
         val greeting = Message("System", "Welcome to LanChat version $versionCode")
         application {
             Window(
@@ -52,6 +60,9 @@ private class LanChat : CliktCommand(
                 title = "LanChat",
                 icon = painterResource("lanchat.png")
             ) {
+                window.minimumSize = DensityDimension(800, 600, density)
+                window.preferredSize = DensityDimension(800, 600, density)
+
                 val messages = remember { mutableStateListOf(greeting) }
                 thread {
                     val receiver = Receiver(5000) { source, message ->
@@ -59,11 +70,15 @@ private class LanChat : CliktCommand(
                     }
                     receiver.run()
                 }
-                ComposeUI(
-                    messages = messages,
-                    sendMessage = ::sendMessage,
-                    onLinkClicked = ::linkClicked
-                )
+                CompositionLocalProvider(
+                    LocalDensity provides if (density != null) Density(density) else LocalDensity.current,
+                ) {
+                    ComposeUI(
+                        messages = messages,
+                        sendMessage = ::sendMessage,
+                        onLinkClicked = ::linkClicked
+                    )
+                }
             }
         }
     }
