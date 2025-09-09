@@ -1,0 +1,74 @@
+name: Test package installability
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+       - uses: actions/checkout@v4
+       - name: Build
+         run: |
+           ./gradlew pinpitPackageDefaultDebUbuntuFocalX64
+       - name: Upload artifacts
+         uses: actions/upload-artifact@v4
+         with:
+           name: debs
+           path: desktop/build/pinpit/binaries/main-default/linux/x64/deb/lanchat-ubuntu-20.04-x64-*.deb
+           if-no-files-found: error
+
+  test-installability:
+    needs: build
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - codename: focal
+            version: 20.04
+
+    container:
+      image: ubuntu:${{ matrix.codename }}
+    steps:
+      - name: Download built debs
+        uses: actions/download-artifact@v4
+        with:
+          name: debs
+          path: /desktop
+
+      - name: Prepare apt and speedups
+        shell: bash
+        env:
+          DEBIAN_FRONTEND: noninteractive
+        run: |
+          set -euxo pipefail
+          apt-get update
+          apt-get install -y --no-install-recommends ca-certificates apt-transport-https gnupg
+          apt-get install -y --no-install-recommends eatmydata tree
+
+      - name: Install deb
+        shell: bash
+        env:
+          DEBIAN_FRONTEND: noninteractive
+        run: |
+          set -euxo pipefail
+          apt-get update
+          tree /desktop
+          eatmydata apt-get install -y /desktop/lanchat-ubuntu-${{ matrix.version }}-x64-*.deb
+
+      - name: Assert packages are installed
+        shell: bash
+        run: |
+          set -euxo pipefail
+          pkgs=$(dpkg-deb -f /desktop/lanchat-ubuntu-${{ matrix.version }}-x64-*.deb Package | sort -u)
+          echo "Checking installed status for: $pkgs"
+          for p in $pkgs; do
+            dpkg -s "$p" | grep -E '^Status: install ok installed'
+          done
+
+      - name: Try running binaries
+        run: |
+          lanchat-compose --version
