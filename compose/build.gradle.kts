@@ -50,3 +50,7 @@ android {
         }
     }
 }
+
+configurations.matching { it.name == "ktlint" }.configureEach {
+    isCanBeConsumed = false
+}
