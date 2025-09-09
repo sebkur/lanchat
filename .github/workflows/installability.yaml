@@ -29,6 +29,10 @@ jobs:
         include:
           - codename: focal
             version: 20.04
+          - codename: jammy
+            version: 20.04
+          - codename: noble
+            version: 20.04
 
     container:
       image: ubuntu:${{ matrix.codename }}
