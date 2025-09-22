@@ -94,11 +94,11 @@ pinpit.desktop {
                 debPreRm.set(project.file("src/main/packaging/deb/prerm"))
                 debCopyright.set(project.file("src/main/packaging/deb/copyright"))
                 debLauncher.set(project.file("src/main/packaging/deb/launcher.desktop"))
-                deb("UbuntuFocalX64") {
-                    qualifier = "ubuntu-20.04"
+                deb("universalX64") {
+                    qualifier = "universal"
                     arch = "x64"
                     depends(
-                        "libc6", "libexpat1", "libgcc-s1", "libpcre3", "libuuid1", "xdg-utils",
+                        "libc6", "libexpat1", "libgcc-s1", "libuuid1", "xdg-utils",
                         "zlib1g", "libnotify4"
                     )
                 }
