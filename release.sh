@@ -19,8 +19,10 @@ echo "Building release $VERSION"
 # Linux
 ./gradlew \
     pinpitPackageDefaultDistributableTarGzLinuxX64 \
+    pinpitPackageDefaultDistributableTarGzLinuxArm64 \
     pinpitPackageDefaultDebUniversalX64 \
-    pinpitPackageDefaultAppImageLinuxX64
+    pinpitPackageDefaultAppImageLinuxX64 \
+    pinpitPackageDefaultAppImageLinuxArm64
 
 DIR=dist
 
@@ -43,4 +45,6 @@ mv "$DIR/Lanchat-x64-$VERSION.msi"           "$DIR/Lanchat-windows-x64-$VERSION.
 
 mv "$DIR/lanchat-universal-x64-$VERSION.deb" "$DIR/Lanchat-x64-$VERSION.deb"
 mv "$DIR/lanchat-x64-$VERSION.tar.gz"        "$DIR/Lanchat-linux-x64-$VERSION.tar.gz"
+mv "$DIR/lanchat-arm64-$VERSION.tar.gz"      "$DIR/Lanchat-linux-arm64-$VERSION.tar.gz"
 mv "$DIR/lanchat-x64-$VERSION.AppImage"      "$DIR/Lanchat-x64-$VERSION.AppImage"
+mv "$DIR/lanchat-arm64-$VERSION.AppImage"    "$DIR/Lanchat-arm64-$VERSION.AppImage"

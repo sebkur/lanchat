@@ -24,6 +24,11 @@ val linuxX64: Configuration by configurations.creating {
     attributes { attribute(attributeUsage, "java-runtime") }
 }
 
+val linuxArm64: Configuration by configurations.creating {
+    extendsFrom(configurations.implementation.get())
+    attributes { attribute(attributeUsage, "java-runtime") }
+}
+
 val macosX64: Configuration by configurations.creating {
     extendsFrom(configurations.implementation.get())
     attributes { attribute(attributeUsage, "java-runtime") }
@@ -59,6 +64,7 @@ dependencies {
     currentOs(compose.desktop.currentOs)
     windowsX64(compose.desktop.windows_x64)
     linuxX64(compose.desktop.linux_x64)
+    linuxArm64(compose.desktop.linux_arm64)
     macosX64(compose.desktop.macos_x64)
     macosArm64(compose.desktop.macos_arm64)
     implementation("com.github.ajalt.clikt:clikt:4.2.0")
@@ -106,8 +112,15 @@ pinpit.desktop {
                     format = "tar.gz"
                     arch = "x64"
                 }
+                distributableArchive {
+                    format = "tar.gz"
+                    arch = "arm64"
+                }
                 appImage {
                     arch = "x64"
+                }
+                appImage {
+                    arch = "arm64"
                 }
             }
             windows {
