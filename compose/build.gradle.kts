@@ -31,7 +31,7 @@ kotlin {
 }
 
 android {
-    compileSdk = 35
+    compileSdk = 36
     namespace = "de.mobanisto.lanchat.common"
 
     defaultConfig {

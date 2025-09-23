@@ -28,7 +28,7 @@ tasks.withType<KotlinCompile> {
 }
 
 android {
-    compileSdk = 35
+    compileSdk = 36
     namespace = "de.mobanisto.apps.lanchat"
 
     defaultConfig {
