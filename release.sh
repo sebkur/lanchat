@@ -54,11 +54,11 @@ mv "$DIR/Lanchat-arm64-$VERSION.zip"         "$DIR/Lanchat-macos-arm64-$VERSION.
 
 mv "$DIR/Lanchat-x64-$VERSION.msi"           "$DIR/Lanchat-windows-x64-$VERSION.zip"
 
-mv "$DIR/lanchat-universal-x64-$VERSION.deb" "$DIR/Lanchat-x64-$VERSION.deb"
-mv "$DIR/lanchat-x64-$VERSION.tar.gz"        "$DIR/Lanchat-linux-x64-$VERSION.tar.gz"
-mv "$DIR/lanchat-arm64-$VERSION.tar.gz"      "$DIR/Lanchat-linux-arm64-$VERSION.tar.gz"
-mv "$DIR/lanchat-x64-$VERSION.AppImage"      "$DIR/Lanchat-x64-$VERSION.AppImage"
-mv "$DIR/lanchat-arm64-$VERSION.AppImage"    "$DIR/Lanchat-arm64-$VERSION.AppImage"
+mv "$DIR/lanchat-universal-x64-$VERSION.deb" "$DIR/lanchat-linux-x64-$VERSION.deb"
+mv "$DIR/lanchat-x64-$VERSION.tar.gz"        "$DIR/lanchat-linux-x64-$VERSION.tar.gz"
+mv "$DIR/lanchat-arm64-$VERSION.tar.gz"      "$DIR/lanchat-linux-arm64-$VERSION.tar.gz"
+mv "$DIR/lanchat-x64-$VERSION.AppImage"      "$DIR/lanchat-linux-x64-$VERSION.AppImage"
+mv "$DIR/lanchat-arm64-$VERSION.AppImage"    "$DIR/lanchat-linux-arm64-$VERSION.AppImage"
 
-mv "$DIR/lanchat-android-release.aab"        "$DIR/lanchat-$VERSION.aab"
-mv "$DIR/lanchat-android-release.apk"        "$DIR/lanchat-$VERSION.apk"
+mv "$DIR/lanchat-android-release.aab"        "$DIR/lanchat-android-$VERSION.aab"
+mv "$DIR/lanchat-android-release.apk"        "$DIR/lanchat-android-$VERSION.apk"
