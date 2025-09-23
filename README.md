@@ -25,13 +25,17 @@ Build an MSI file:
 
     ./gradlew pinpitPackageDefaultMsiX64
 
-Build a Debian / Ubuntu package:
-
-    ./gradlew pinpitPackageDefaultDebUniversalX64
-
 Build macOS packages:
 
     ./gradlew pinpitPackageDefaultDistributableZipMacosArm64 pinpitPackageDefaultDistributableZipMacosX64
+
+Build a Linux AppImage:
+
+    ./gradlew pinpitPackageDefaultAppImageLinuxX64
+
+Build a Debian / Ubuntu package:
+
+    ./gradlew pinpitPackageDefaultDebUniversalX64
 
 ## Command line tools
 
