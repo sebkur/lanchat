@@ -57,7 +57,7 @@ private class LanChat : CliktCommand(
         application {
             Window(
                 onCloseRequest = ::exitApplication,
-                title = "LanChat",
+                title = "LanChat $versionCode",
                 icon = painterResource("lanchat.png")
             ) {
                 window.minimumSize = DensityDimension(800, 600, density)
