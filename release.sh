@@ -7,6 +7,9 @@ echo "Building release $VERSION"
 
 ./gradlew clean
 
+# Android
+./gradlew assembleRelease bundleRelease
+
 # macOS
 ./gradlew \
     pinpitPackageDefaultDistributableZipMacosX64 \
@@ -29,11 +32,19 @@ DIR=dist
 rm -rf $DIR
 mkdir $DIR
 
-FILES=$(find desktop/build -type f -and \( \
+FILES_DESKTOP=$(find desktop/build -type f -and \( \
     -name "*AppImage" -or -name "*.zip" -or -name "*msi" -or \
     -name "*.deb" -or -name "*.tar.gz" \))
 
-for f in $FILES; do
+for f in $FILES_DESKTOP; do
+    echo $f;
+    cp $f $DIR;
+done;
+
+FILES_ANDROID=$(find android/build/outputs -type f -and \( \
+    -name "*apk" -or -name "*.aab" \))
+
+for f in $FILES_ANDROID; do
     echo $f;
     cp $f $DIR;
 done;
@@ -48,3 +59,6 @@ mv "$DIR/lanchat-x64-$VERSION.tar.gz"        "$DIR/Lanchat-linux-x64-$VERSION.ta
 mv "$DIR/lanchat-arm64-$VERSION.tar.gz"      "$DIR/Lanchat-linux-arm64-$VERSION.tar.gz"
 mv "$DIR/lanchat-x64-$VERSION.AppImage"      "$DIR/Lanchat-x64-$VERSION.AppImage"
 mv "$DIR/lanchat-arm64-$VERSION.AppImage"    "$DIR/Lanchat-arm64-$VERSION.AppImage"
+
+mv "$DIR/lanchat-android-release.aab"        "$DIR/lanchat-$VERSION.aab"
+mv "$DIR/lanchat-android-release.apk"        "$DIR/lanchat-$VERSION.apk"
