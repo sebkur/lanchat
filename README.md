@@ -76,6 +76,17 @@ To build a release `apk` instead:
 
     ./gradlew assembleRelease
 
+## Release documentation
+
+Create a tag and push it to origin:
+
+    git tag -a release-<version> -m "Release <version>"
+    git push origin release-<version>
+
+Build all release binaries:
+
+    ./release.sh
+
 ## Technical details
 
 The default port configured to broadcast messages is 5000.
