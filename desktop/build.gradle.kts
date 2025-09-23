@@ -106,6 +106,9 @@ pinpit.desktop {
                     format = "tar.gz"
                     arch = "x64"
                 }
+                appImage {
+                    arch = "x64"
+                }
             }
             windows {
                 dirChooser = true

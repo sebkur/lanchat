@@ -19,7 +19,8 @@ echo "Building release $VERSION"
 # Linux
 ./gradlew \
     pinpitPackageDefaultDistributableTarGzLinuxX64 \
-    pinpitPackageDefaultDebUniversalX64
+    pinpitPackageDefaultDebUniversalX64 \
+    pinpitPackageDefaultAppImageLinuxX64
 
 DIR=dist
 
@@ -27,7 +28,7 @@ rm -rf $DIR
 mkdir $DIR
 
 FILES=$(find desktop/build -type f -and \( \
-    -name "*.zip" -or -name "*msi" -or \
+    -name "*AppImage" -or -name "*.zip" -or -name "*msi" -or \
     -name "*.deb" -or -name "*.tar.gz" \))
 
 for f in $FILES; do
@@ -42,3 +43,4 @@ mv "$DIR/Lanchat-x64-$VERSION.msi"           "$DIR/Lanchat-windows-x64-$VERSION.
 
 mv "$DIR/lanchat-universal-x64-$VERSION.deb" "$DIR/Lanchat-x64-$VERSION.deb"
 mv "$DIR/lanchat-x64-$VERSION.tar.gz"        "$DIR/Lanchat-linux-x64-$VERSION.tar.gz"
+mv "$DIR/lanchat-x64-$VERSION.AppImage"      "$DIR/Lanchat-x64-$VERSION.AppImage"
